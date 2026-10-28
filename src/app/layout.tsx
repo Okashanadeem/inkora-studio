@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { Header, Footer } from '@/components/shared/shell';
+import { FloatingWhatsAppButton } from '@/components/shared/floating-whatsapp';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -28,6 +29,7 @@ export default function RootLayout({
           <Header />
           <main className="flex-1">{children}</main>
           <Footer />
+          <FloatingWhatsAppButton />
         </TooltipProvider>
       </body>
     </html>

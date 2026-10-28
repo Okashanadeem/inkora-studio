@@ -29,6 +29,17 @@ export function WhatsAppButton({
 
   const waLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
+  const handleClick = () => {
+    fetch('/api/inquiries', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        productId: productSlug,
+        source: 'product_page',
+      }),
+    }).catch(() => {});
+  };
+
   return (
     <Button
       variant={variant}
@@ -39,6 +50,7 @@ export function WhatsAppButton({
           href={waLink}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={handleClick}
           className="inline-flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-medium"
         >
           <MessageCircle className="h-4 w-4 fill-emerald-600/20" />

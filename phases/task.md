@@ -18,7 +18,7 @@ Mark a phase as `[x] Completed` only when **all** tasks and acceptance criteria 
 - [x] **Phase 06 — Cart, checkout, orders and abuse protection** (`phases/phase-06/task.md`)
 - [x] **Phase 07 — Payments and transactional email** (`phases/phase-07/task.md`)
 - [x] **Phase 08 — Promotion engine** (`phases/phase-08/task.md`)
-- [ ] **Phase 09 — WhatsApp inquiry** (`phases/phase-09/task.md`)
+- [x] **Phase 09 — WhatsApp inquiry** (`phases/phase-09/task.md`)
 - [ ] **Phase 10 — Verified-purchase reviews** (`phases/phase-10/task.md`)
 - [ ] **Phase 11 — Trending and best sellers** (`phases/phase-11/task.md`)
 - [ ] **Phase 12 — Marketing email and retention** (`phases/phase-12/task.md`)
