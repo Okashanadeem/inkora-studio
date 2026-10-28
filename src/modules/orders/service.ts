@@ -2,6 +2,7 @@ import { createAdminClient } from '@/lib/supabase/admin';
 import { CreateOrderInput, createOrderInputSchema } from './schema';
 import { evaluateOrderRisk } from './risk';
 import { withIdempotency } from '@/lib/auth/idempotency';
+import { sendOrderConfirmationEmail } from '@/lib/email/templates';
 import crypto from 'crypto';
 
 export interface OrderCreationResult {
@@ -177,6 +178,19 @@ export async function placeOrder(
         to_status: initialStatus,
         note: `Order placed via web checkout (${validated.paymentMethod.toUpperCase()})`,
       });
+
+      // Send transactional confirmation email (Section 13)
+      try {
+        await sendOrderConfirmationEmail({
+          recipientEmail: validated.contact.email,
+          recipientName: validated.contact.fullName,
+          orderNumber,
+          grandTotal,
+          trackingToken: rawTrackingToken,
+        });
+      } catch (emailErr) {
+        console.error('Transactional email send failure (non-blocking):', emailErr);
+      }
 
       return {
         orderId: order.id,
