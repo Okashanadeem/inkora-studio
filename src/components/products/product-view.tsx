@@ -6,6 +6,7 @@ import { Price } from '@/components/shared/price';
 import { OptionPicker } from '@/components/shared/option-picker';
 import { QuantityStepper, TierPriceTable } from '@/components/shared/pricing-controls';
 import { WhatsAppButton } from '@/components/shared/whatsapp-button';
+import { FileDropzone } from '@/components/shared/file-dropzone';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -123,6 +124,19 @@ export function ProductCustomizerView({ product }: ProductViewProps) {
               selectedValues={selectedOptions}
               onSelectOption={handleSelectOption}
             />
+
+            {/* Artwork File Upload Dropzone (Section 15) */}
+            <div className="space-y-2 pt-2">
+              <span className="font-semibold text-sm text-foreground block">
+                Upload Custom Artwork / Design
+              </span>
+              <FileDropzone
+                targetPrintWidthInches={8.3}
+                onUploadComplete={(res) => {
+                  console.log('Artwork uploaded to R2:', res.key);
+                }}
+              />
+            </div>
 
             {/* Bulk Pricing Tiers */}
             {product.priceTiers.length > 0 && (
