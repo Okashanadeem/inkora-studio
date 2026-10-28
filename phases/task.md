@@ -12,7 +12,7 @@ Mark a phase as `[x] Completed` only when **all** tasks and acceptance criteria 
 - [x] **Phase 00 — Discovery and accounts** (`phases/phase-00/task.md`)
 - [x] **Phase 01 — Scaffold and design system** (`phases/phase-01/task.md`)
 - [x] **Phase 02 — Database, auth and RLS** (`phases/phase-02/task.md`)
-- [ ] **Phase 03 — Catalogue and admin product management** (`phases/phase-03/task.md`)
+- [x] **Phase 03 — Catalogue and admin product management** (`phases/phase-03/task.md`)
 - [ ] **Phase 04 — Storefront and SEO foundation** (`phases/phase-04/task.md`)
 - [ ] **Phase 05 — Customisation and artwork uploads** (`phases/phase-05/task.md`)
 - [ ] **Phase 06 — Cart, checkout, orders and abuse protection** (`phases/phase-06/task.md`)
