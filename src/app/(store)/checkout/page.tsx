@@ -10,6 +10,7 @@ import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Price } from '@/components/shared/price';
+import { PromoCodeInput } from '@/components/shared/promo-code-input';
 import { placeOrderAction } from '@/modules/orders/actions';
 import { ShieldCheck, Truck, ArrowRight, Lock } from 'lucide-react';
 
@@ -17,8 +18,10 @@ export default function CheckoutPage() {
   const router = useRouter();
   const { items, getSubtotal, clearCart } = useCartStore();
   const subtotal = getSubtotal();
+  const [couponDiscount, setCouponDiscount] = React.useState(0);
+  const [appliedCouponCode, setAppliedCouponCode] = React.useState('');
   const shippingTotal = subtotal >= 3000 ? 0 : 250;
-  const grandTotal = subtotal + shippingTotal;
+  const grandTotal = Math.max(0, subtotal - couponDiscount + shippingTotal);
 
   const [loading, setLoading] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
@@ -73,6 +76,7 @@ export default function CheckoutPage() {
         })),
         paymentMethod,
         idempotencyKey,
+        couponCode: appliedCouponCode || undefined,
       });
 
       clearCart();
@@ -261,6 +265,14 @@ export default function CheckoutPage() {
                     <span className="text-muted-foreground">Subtotal</span>
                     <Price amount={subtotal} />
                   </div>
+                  {couponDiscount > 0 && (
+                    <div className="flex justify-between text-emerald-600 font-medium">
+                      <span>Discount ({appliedCouponCode})</span>
+                      <span>
+                        -<Price amount={couponDiscount} />
+                      </span>
+                    </div>
+                  )}
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Delivery Shipping</span>
                     {shippingTotal === 0 ? (
@@ -273,6 +285,17 @@ export default function CheckoutPage() {
                     <span>Total</span>
                     <Price amount={grandTotal} className="text-lg" />
                   </div>
+                </div>
+
+                {/* Promo Code Input */}
+                <div className="pt-2 border-t">
+                  <PromoCodeInput
+                    subtotal={subtotal}
+                    onApplyDiscount={(discount, promoName) => {
+                      setCouponDiscount(discount);
+                      setAppliedCouponCode(promoName);
+                    }}
+                  />
                 </div>
 
                 {errorMessage && (
