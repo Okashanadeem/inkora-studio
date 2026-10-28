@@ -1,6 +1,6 @@
 # Master Phase Status & Progress Tracker
 
-This document tracks the overall progress across all delivery phases defined in the Master Project Specification. 
+This document tracks the overall progress across all delivery phases defined in the Master Project Specification.
 
 Refer to individual phase folders (`phases/phase-xx/task.md`) for detailed task checklists and acceptance criteria.
 Mark a phase as `[x] Completed` only when **all** tasks and acceptance criteria within its individual `task.md` file are completed and verified.
@@ -10,7 +10,7 @@ Mark a phase as `[x] Completed` only when **all** tasks and acceptance criteria 
 ## Phases Overview
 
 - [x] **Phase 00 — Discovery and accounts** (`phases/phase-00/task.md`)
-- [ ] **Phase 01 — Scaffold and design system** (`phases/phase-01/task.md`)
+- [x] **Phase 01 — Scaffold and design system** (`phases/phase-01/task.md`)
 - [ ] **Phase 02 — Database, auth and RLS** (`phases/phase-02/task.md`)
 - [ ] **Phase 03 — Catalogue and admin product management** (`phases/phase-03/task.md`)
 - [ ] **Phase 04 — Storefront and SEO foundation** (`phases/phase-04/task.md`)
