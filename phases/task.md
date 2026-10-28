@@ -9,7 +9,7 @@ Mark a phase as `[x] Completed` only when **all** tasks and acceptance criteria 
 
 ## Phases Overview
 
-- [ ] **Phase 00 — Discovery and accounts** (`phases/phase-00/task.md`)
+- [x] **Phase 00 — Discovery and accounts** (`phases/phase-00/task.md`)
 - [ ] **Phase 01 — Scaffold and design system** (`phases/phase-01/task.md`)
 - [ ] **Phase 02 — Database, auth and RLS** (`phases/phase-02/task.md`)
 - [ ] **Phase 03 — Catalogue and admin product management** (`phases/phase-03/task.md`)
