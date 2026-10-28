@@ -6,9 +6,13 @@ import { Container } from '@/components/shared/layout';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Menu, ShoppingBag, Flame } from 'lucide-react';
+import { useCartStore } from '@/lib/cart/cart-store';
+import { CartDrawer } from '@/components/shared/cart-drawer';
 
 export function Header() {
   const [isOpen, setIsOpen] = React.useState(false);
+  const { openCart, getItemCount } = useCartStore();
+  const itemCount = getItemCount();
 
   const navigation = [
     { name: 'Home', href: '/' },
@@ -48,12 +52,17 @@ export function Header() {
         </div>
 
         <div className="flex items-center gap-3">
-          <Link href="/cart">
-            <Button variant="ghost" size="icon" className="relative">
-              <ShoppingBag className="h-5 w-5" />
-              <span className="sr-only">Shopping Cart</span>
-            </Button>
-          </Link>
+          <Button variant="ghost" size="icon" className="relative" onClick={openCart}>
+            <ShoppingBag className="h-5 w-5" />
+            {itemCount > 0 && (
+              <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-accent text-[10px] font-bold text-accent-foreground">
+                {itemCount}
+              </span>
+            )}
+            <span className="sr-only">Shopping Cart</span>
+          </Button>
+
+          <CartDrawer />
 
           {/* Mobile Navigation Sheet */}
           <Sheet open={isOpen} onOpenChange={setIsOpen}>

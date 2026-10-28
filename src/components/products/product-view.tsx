@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ShieldCheck, Truck, ShoppingBag, ImageIcon } from 'lucide-react';
+import { useCartStore } from '@/lib/cart/cart-store';
 
 interface ProductViewProps {
   product: {
@@ -42,6 +43,11 @@ export function ProductCustomizerView({ product }: ProductViewProps) {
   });
 
   const [quantity, setQuantity] = React.useState(1);
+  const [uploadedArtwork, setUploadedArtwork] = React.useState<{
+    key: string;
+    filename: string;
+  } | null>(null);
+  const { addItem } = useCartStore();
 
   // Calculate live price based on base price, option modifiers, and quantity/tiers
   const unitPrice = React.useMemo(() => {
@@ -133,7 +139,7 @@ export function ProductCustomizerView({ product }: ProductViewProps) {
               <FileDropzone
                 targetPrintWidthInches={8.3}
                 onUploadComplete={(res) => {
-                  console.log('Artwork uploaded to R2:', res.key);
+                  setUploadedArtwork({ key: res.key, filename: res.filename });
                 }}
               />
             </div>
@@ -151,7 +157,22 @@ export function ProductCustomizerView({ product }: ProductViewProps) {
 
             {/* Primary Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t">
-              <Button size="lg" className="flex-1 gap-2 font-medium">
+              <Button
+                size="lg"
+                className="flex-1 gap-2 font-medium"
+                onClick={() => {
+                  addItem({
+                    productId: product.id,
+                    name: product.name,
+                    slug: product.slug,
+                    unitPrice,
+                    quantity,
+                    options: selectedOptions,
+                    artworkKey: uploadedArtwork?.key,
+                    artworkFilename: uploadedArtwork?.filename,
+                  });
+                }}
+              >
                 <ShoppingBag className="h-4 w-4" /> Add to Cart (PKR {totalPrice.toLocaleString()})
               </Button>
               <WhatsAppButton productName={product.name} productSlug={product.slug} size="lg" />
